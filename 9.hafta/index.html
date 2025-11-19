@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sünger Bob Lab Görevi</title>
+    <style>
+        /* --- TASARIM KISMI --- */
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* Arka plan ayarları */
+            background-size: cover;       /* Ekranı kapla */
+            background-position: center;  /* Ortala */
+            background-attachment: fixed; /* Sabitle */
+            transition: background-image 0.5s ease-in-out; /* Yumuşak geçiş */
+            min-height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 30px;
+            margin-top: 100px;
+            flex-wrap: wrap; /* Ekran küçülürse alt alta geçsin */
+        }
+
+        .image-box {
+            background-color: rgba(255, 255, 255, 0.85); /* Yarı saydam beyaz kutu */
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+            width: 280px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            backdrop-filter: blur(5px); /* Arkası buzlu cam gibi olsun */
+        }
+
+        .character-img {
+            width: 100%;
+            height: 250px;
+            object-fit: contain; /* Resmi kutuya sığdır, kesme */
+            margin-bottom: 15px;
+            border-radius: 10px;
+            display: block; /* Başlangıçta görünsün */
+        }
+
+        button {
+            padding: 12px 25px;
+            background-color: #ff4081; /* Tatlı bir pembe buton */
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            background-color: #e91e63;
+            transform: scale(1.05); /* Üzerine gelince hafif büyüsün */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div class="image-box">
+            <img id="img1" src="sandy.jpg" class="character-img" alt="Sandy">
+            <br>
+            <button onclick="gosterGizle('img1')">Sandy'i Gizle/Göster</button>
+        </div>
+
+        <div class="image-box">
+            <img id="img2" src="plankton.jpg" class="character-img" alt="Plankton">
+            <br>
+            <button onclick="gosterGizle('img2')">Plankton'u Gizle/Göster</button>
+        </div>
+
+        <div class="image-box">
+            <img id="img3" src="pearl.jpg" class="character-img" alt="Pearl">
+            <br>
+            <button onclick="gosterGizle('img3')">Pearl'ü Gizle/Göster</button>
+        </div>
+
+    </div>
+
+    <script>
+        // --- JAVASCRIPT KISMI ---
+
+        /* GÖREV 1: 10 Arka Plandan Rastgele Seç 
+           Attığın resimlere göre listeyi tam olarak buraya yazdım.
+        */
+        var arkaPlanListesi = [
+            "arka1.png",   // PNG
+            "arka2.png",   // PNG
+            "arka3.png",   // PNG
+            "arka4.jpg",   // JPG
+            "arka5.jpg",
+            "arka6.jpg",
+            "arka7.jpg",
+            "arka8.jpg",
+            "arka9.jpg",
+            "arka10.jpeg"  // JPEG (Buna dikkat!)
+        ];
+
+        function rastgeleArkaPlan() {
+            // 0 ile 9 arasında rastgele sayı tut
+            var sansliSayi = Math.floor(Math.random() * 10);
+            
+            // Listeden o sıradaki resim ismini al
+            var secilenResim = arkaPlanListesi[sansliSayi];
+
+            // Body'nin arka planına yerleştir
+            document.body.style.backgroundImage = "url('" + secilenResim + "')";
+            
+            // Hata olursa konsoldan görmek için (F12 -> Console)
+            console.log("Şu an gösterilen arka plan: " + secilenResim);
+        }
+
+        // Sayfa her yüklendiğinde (veya F5 yapınca) bu fonksiyon çalışsın
+        window.onload = rastgeleArkaPlan;
+
+
+        // GÖREV 2: Butonlara basınca karakterleri Gizle/Göster
+        function gosterGizle(hangiResimId) {
+            // İlgili resmi bul
+            var resim = document.getElementById(hangiResimId);
+
+            // Görünürlük kontrolü yap
+            if (resim.style.display === "none") {
+                resim.style.display = "block"; // Yoksa -> Göster
+            } else {
+                resim.style.display = "none";  // Varsa -> Gizle
+            }
+        }
+    </script>
+
+</body>
+</html>
